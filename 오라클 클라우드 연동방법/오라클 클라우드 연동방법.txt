@@ -1,0 +1,53 @@
+https://www.oracle.com/database/technologies/appdev/jdbc-ucp-19c-downloads.html
+여기 들어가서  밑에 jar파일 4개 다운
+ojdbc10.jar
+oraclepki.jar
+osdt_cert.jar
+osdt_core.jar
+
+1. Dynamic web Project 생성 -> lib폴더에 jar파일 4개 넣기
+2. JRE System Library 우측클릭 -> Properties 클릭 -> Intalled JRES 클릭
+ 	-> Installed JREs 하나있는거 클릭후 Edit -> Add External JARs 클릭 후 jar파일 4개 가져온후 Finsh
+
+테스트
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBconn {
+	public static void main(String[] args) {
+		//db이름_medium?TNS_ADMIN="경로";
+			   String url ="jdbc:oracle:thin:@DB이름_medium?TNS_ADMIN=C://Wallet_DB이름";
+		       String userid="";
+		       String pwd ="";
+		       
+		     
+		       //드라이버 로딩 
+		       try {
+		    	    //oracle DB연결 드라이버 로딩
+		    	    Class.forName("oracle.jdbc.OracleDriver");//
+		    	    System.out.println("드라이버 로딩 성공");
+		       }catch(Exception e) {
+		    	    e.printStackTrace();
+		       }
+		       
+		       //DBMS와 연결
+		       try {
+		    	       System.out.println("데이터베이스 연결 준비......");
+		    	       Connection con =DriverManager.getConnection(url, userid, pwd);
+		    	       if(con!=null) {
+		    	    	   System.out.println("데이터베이스 연결 성공...");
+		    	       }
+		       }catch(Exception e) {
+		    	   e.printStackTrace();
+		       }
+			
+		
+
+	}
+		
+}
+
+
+
